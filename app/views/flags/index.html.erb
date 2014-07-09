@@ -1,0 +1,14 @@
+<h2>Flag list (<%= Flag.count %>)</h2>
+
+<table class="table">
+<tr>
+	<th class="col-md-1">Id</th>
+	<th class="col-md-11">Summary</th>
+</tr>
+<% Flag.find(:all, :order=>"id desc", :limit => 50).each do |flag| %>
+	<tr>
+		<td class="col-md-1"><%= flag.id %></td>
+		<td class="col-md-11"><%= link_to flag.title, flag_path(:id => flag.id) %></td>
+	</tr>
+<% end %>
+</table>

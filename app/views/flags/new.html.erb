@@ -1,0 +1,6 @@
+<h2>Create flag</h2>
+<%= form_for @flag, url: {action: "create"} do |f| %>
+	<%= f.text_field :title %>
+	<%= f.text_area :summary, size:"60x12" %>
+	<%= f.submit "Create" %>
+<% end %>

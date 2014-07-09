@@ -1,0 +1,2 @@
+module AddFlagHelper
+end

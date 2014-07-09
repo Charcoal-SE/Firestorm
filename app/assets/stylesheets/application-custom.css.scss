@@ -1,0 +1,25 @@
+.navbar{
+	background-color: orange;
+}
+ul.dropdown-menu li a{
+	color:black !important
+}
+.navbar-brand{
+	color:rgba(255,255,255,0.8) !important;
+	font-size:20px;
+}
+ul.nav.navbar-nav a{
+	color: rgba(255,255,255,0.7)
+}
+ul.nav.navbar-nav li a{
+	font-size:17px
+}
+ul.nav.navbar-nav li.active a{
+	background-color:rgba(255,255,255,0.3) !important;
+	color:white !important;
+	font-weight:bold
+}
+body{
+	padding-left:30px;
+	padding-right:30px;
+}
