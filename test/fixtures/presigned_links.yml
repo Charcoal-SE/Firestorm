@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  flag_id: 1
+  presigned_string: MyString
+
+two:
+  flag_id: 1
+  presigned_string: MyString

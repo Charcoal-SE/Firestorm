@@ -1,5 +1,5 @@
 class FlagsController < ApplicationController
-	before_filter :authenticate_user!, :except => :show
+	before_filter :authenticate_user!, except: :view
 	def index
 
 	end
@@ -10,9 +10,29 @@ class FlagsController < ApplicationController
 		@flag = Flag.new
 	end
 	def create
-		puts "logfind: #{params[:flag]}"
 		flag = Flag.new
 		flag.title = params[:flag]["title"]
+		flag.summary = params[:flag]["summary"]
 		flag.save!
+		link = PresignedLinks.new
+		link.flag_id = flag.id
+		link.presigned_string = SecureRandom.urlsafe_base64(5)
+		link.save!
+		redirect_to flag_path(:id => flag.id)
 	end
-end
+	def destroy
+		Flag.find_by_id(params["id"]).delete()
+		redirect_to "/flags"
+	end
+	def view
+		puts "logfind2: #{params}"
+
+		link=PresignedLinks.find_by_presigned_string(params["presigned_string"])
+		if !link or link.flag_id != params["id"].to_i
+			not_found
+			return
+		end
+
+		@flag = Flag.find_by_id(params["id"])
+	end
+end	

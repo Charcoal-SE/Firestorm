@@ -1,3 +1,7 @@
 <h2><%= @flag.title %></h2>
 
+<p><a class="text-muted"><%= PresignedLinks.find_by_flag_id(@flag.id).presigned_string if PresignedLinks.find_by_flag_id(@flag.id) %></a></p>
+
 <p><%= @flag.summary %></p>
+
+<%= button_to "Delete", @flag, :method=>:delete, :class=>:destroy, class: "btn btn-danger"%>

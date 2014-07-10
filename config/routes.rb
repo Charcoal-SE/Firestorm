@@ -6,6 +6,8 @@ Firestorm::Application.routes.draw do
 
   resources :flags
 
+  match "flags/view/:id/:presigned_string" => "flags#view"
+
   devise_scope :user do
     get "/users/sign_up",  :to => "flags#index"
   end

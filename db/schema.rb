@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140709014421) do
+ActiveRecord::Schema.define(:version => 20140709165653) do
 
   create_table "flags", :force => true do |t|
     t.text     "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "title"
+  end
+
+  create_table "presigned_links", :force => true do |t|
+    t.integer  "flag_id"
+    t.string   "presigned_string"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "users", :force => true do |t|
