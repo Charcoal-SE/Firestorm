@@ -1,7 +1,36 @@
-<h2><%= @flag.title %></h2>
-
-<p><a class="text-muted"><%= PresignedLinks.find_by_flag_id(@flag.id).presigned_string if PresignedLinks.find_by_flag_id(@flag.id) %></a></p>
-
+<h2><%= @flag.title %> <%= button_to "Delete", @flag, :method=>:delete, :class=>:destroy, class: "btn btn-danger btn-sm"%></h2> 
+<% if PresignedLinks.find_by_flag_id(@flag.id) %>
+<p><a class="text-muted" href="<%= request.host.to_s+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %>"><%= request.host.to_s+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %></a></p>
+<% end %>
 <p><%= @flag.summary %></p>
 
-<%= button_to "Delete", @flag, :method=>:delete, :class=>:destroy, class: "btn btn-danger"%>
+<h4>Data:</h4>
+<table class="table table-bordered" id="flag-data-table">
+<tr>
+	<th class="col-md-2">Description</th>
+	<th class="col-md-10">Value</th>
+</tr>
+<% FlagData.find_all_by_flag_id(@flag.id).each do |data| %>
+	<tr>
+		<td class="col-md-1"><%= data.key %></td>
+		<td class="col-md-11">
+			<%= data.object %>
+			<span class="delete-flag-data" data-flag-data-id="<%= data.id %>"><strong>&times;</strong></span>
+		</td>
+	</tr>
+<% end %>
+<tr>
+	<td class="col-md-12" colspan="2" style="text-align:center"><a class="add-flag-data" data-flag-id="<%= @flag.id%>"><strong>+</strong> add new data</a></td>
+</tr>
+</table>
+
+<h4>Leave a note</h4>
+<p class="text-muted">Anyone with this link can see notes</p>
+
+<%= form_for FlagComments.new, url: {action: "create"} do |f| %>
+	<%= f.text_field :username, class: "form-control", placeholder: "Username"%>
+	<br />
+	<%= f.text_area :body, size:"60x3", class: "form-control", placeholder: "Text" %>
+	<br />
+	<%= f.submit "Create", class: "btn btn-primary" %>
+<% end %>

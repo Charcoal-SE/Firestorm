@@ -4,6 +4,8 @@ Firestorm::Application.routes.draw do
 
   get "greetings/hello"
 
+  post "flags/add_data"
+
   resources :flags
 
   match "flags/view/:id/:presigned_string" => "flags#view"

@@ -1,5 +1,5 @@
 class FlagsController < ApplicationController
-	before_filter :authenticate_user!, except: :view
+	before_filter :authenticate_user!, except: [:view, :add_data]
 	def index
 
 	end
@@ -22,6 +22,9 @@ class FlagsController < ApplicationController
 	end
 	def destroy
 		Flag.find_by_id(params["id"]).delete()
+		FlagData.find_all_by_flag_id(params["id"]).each do |d|
+			d.delete()
+		end
 		redirect_to "/flags"
 	end
 	def view
@@ -34,5 +37,18 @@ class FlagsController < ApplicationController
 		end
 
 		@flag = Flag.find_by_id(params["id"])
+	end
+	def add_data
+		flag = Flag.find_by_id(params["flag_id"])
+		if !flag
+			render text: "flag doesn't exist"
+			return
+		end
+		data = FlagData.new
+		data.flag_id = flag.id
+		data.key = params["key"]
+		data.object = params["value"]
+		data.save!
+		render text: "success"
 	end
 end	

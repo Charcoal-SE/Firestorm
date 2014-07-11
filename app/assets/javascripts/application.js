@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require application-custom
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap.min

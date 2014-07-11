@@ -1,3 +1,17 @@
 <h2><%= @flag.title %></h2>
 
 <p><%= @flag.summary %></p>
+
+<h4>Data:</h4>
+<table class="table">
+<tr>
+	<th class="col-md-2">Description</th>
+	<th class="col-md-10">Value</th>
+</tr>
+<% FlagData.find_all_by_flag_id(@flag.id).each do |data| %>
+	<tr>
+		<td class="col-md-1"><%= data.key %></td>
+		<td class="col-md-11"><%= data.object %></td>
+	</tr>
+<% end %>
+</table>

@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140709165653) do
+ActiveRecord::Schema.define(:version => 20140710204654) do
+
+  create_table "flag_comments", :force => true do |t|
+    t.string   "username"
+    t.text     "body"
+    t.integer  "flag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "flag_data", :force => true do |t|
+    t.string   "key"
+    t.string   "object"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "flag_id"
+  end
 
   create_table "flags", :force => true do |t|
     t.text     "summary"

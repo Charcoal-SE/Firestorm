@@ -23,3 +23,15 @@ body{
 	padding-left:30px;
 	padding-right:30px;
 }
+a.add-flag-data{
+	color:gray
+}
+span.delete-flag-data{
+	float:right;
+	color: gray;
+	font-size:17px;
+	cursor: pointer;
+}
+span.delete-flag-data:hover{
+	color:rgb(199,39,32);
+}
