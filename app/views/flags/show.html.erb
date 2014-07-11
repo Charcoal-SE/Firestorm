@@ -1,4 +1,4 @@
-<h2><%= @flag.title %> <%= button_to "Delete", @flag, :method=>:delete, :class=>:destroy, class: "btn btn-danger btn-sm"%></h2> 
+<h2><%= @flag.title %> <%= link_to "edit", "/flags/#{@flag.id}/edit", style: "font-size:12px"%>  <%= link_to "delete", @flag, :method=>:delete, :class=>:destroy, style: "font-size:12px"%></h2> 
 <% if PresignedLinks.find_by_flag_id(@flag.id) %>
 <p><a class="text-muted" href="<%= request.host.to_s+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %>"><%= request.host.to_s+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %></a></p>
 <% end %>
@@ -27,7 +27,7 @@
 <h4>Leave a note</h4>
 <p class="text-muted">Anyone with this link can see notes</p>
 
-<%= form_for FlagComments.new, url: {action: "create"} do |f| %>
+<%= form_for FlagComments.new, class: "add-comment-form", url: {action: "create"} do |f| %>
 	<%= f.text_field :username, class: "form-control", placeholder: "Username"%>
 	<br />
 	<%= f.text_area :body, size:"60x3", class: "form-control", placeholder: "Text" %>

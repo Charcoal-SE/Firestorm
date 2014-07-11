@@ -1,0 +1,9 @@
+<h2>Editing flag...</h2>
+<%= form_for @flag, url: {action: "update"} do |f| %>
+	<%= f.text_field :title, class: "form-control", placeholder: "Title"%>
+	<br />
+	<%= f.text_area :summary, size:"60x3", class: "form-control", placeholder: "Summary" %>
+	<br />
+	<%= f.submit "Save", class: "btn btn-primary" %>
+	<%= link_to (button_tag "Cancel", type: "button", class: "btn btn-default"), "/flags" %>
+<% end %>

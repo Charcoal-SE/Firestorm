@@ -51,4 +51,15 @@ class FlagsController < ApplicationController
 		data.save!
 		render text: "success"
 	end
+	def edit
+		puts "logfind3: #{params}"
+		@flag = Flag.find_by_id(params["id"].to_i)
+	end
+	def update
+		flag = Flag.find_by_id(params["id"])
+		flag.summary = params["flag"]["summary"]
+		flag.title = params["flag"]["title"]
+		flag.save!
+		redirect_to flag_path(params["id"])
+	end
 end	
