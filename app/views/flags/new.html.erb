@@ -1,5 +1,5 @@
 <h2>Create flag</h2>
-<%= form_for @flag, url: {action: "create"} do |f| %>
+<%= form_for @flag, url: {action: "create"}, :html => {:class=>"col-md-9"} do |f| %>
 	<%= f.text_field :title, class: "form-control", placeholder: "Title"%>
 	<br />
 	<%= f.text_area :summary, size:"60x3", class: "form-control", placeholder: "Summary" %>
