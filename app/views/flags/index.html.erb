@@ -1,14 +1,14 @@
 <h2>Flag list (<%= Flag.count %>)</h2>
 
 <table class="table">
-<tr>
-	<th class="col-md-1">Id</th>
-	<th class="col-md-11">Summary</th>
-</tr>
 <% Flag.find(:all, :order=>"id desc", :limit => 50).each do |flag| %>
+	<% user = User.find_by_id(flag.creator) %>
 	<tr>
-		<td class="col-md-1"><%= flag.id %></td>
-		<td class="col-md-11"><%= link_to flag.title, flag_path(:id => flag.id) %></td>
+		<td class="col-md-12">
+			<h3><%= link_to flag.title, flag_path(:id => flag.id) %></h3>
+			<p class="text-muted"><%= flag.summary %></p>
+			<span class="text-muted" style="text-align:right;float:right">created by <%= user.username %></span>
+		</td>
 	</tr>
 <% end %>
 </table>

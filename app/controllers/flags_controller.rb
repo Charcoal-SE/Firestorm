@@ -13,6 +13,7 @@ class FlagsController < ApplicationController
 		flag = Flag.new
 		flag.title = params[:flag]["title"]
 		flag.summary = params[:flag]["summary"]
+		flag.creator = current_user
 		flag.save!
 		link = PresignedLinks.new
 		link.flag_id = flag.id
