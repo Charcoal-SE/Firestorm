@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140811024415) do
+ActiveRecord::Schema.define(:version => 20140811033333) do
 
   create_table "flag_comments", :force => true do |t|
     t.string   "username"
