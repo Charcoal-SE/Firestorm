@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140710204654) do
+ActiveRecord::Schema.define(:version => 20140811024415) do
 
   create_table "flag_comments", :force => true do |t|
     t.string   "username"
@@ -29,12 +29,8 @@ ActiveRecord::Schema.define(:version => 20140710204654) do
     t.integer  "flag_id"
   end
 
-  create_table "flags", :force => true do |t|
-    t.text     "summary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "title"
-  end
+# Could not dump table "flags" because of following StandardError
+#   Unknown type 'User' for column 'creator'
 
   create_table "presigned_links", :force => true do |t|
     t.integer  "flag_id"
