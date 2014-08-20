@@ -2,4 +2,4 @@
 
 A tool for putting data in flags that wouldn't otherwise fit. Optimized for tabular data. 
 
-Created by The Charcoal Project: chat.stackexchange.com/rooms/11540/charcoal-hq
+Created by The Charcoal Project: http://chat.stackexchange.com/rooms/11540/charcoal-hq
