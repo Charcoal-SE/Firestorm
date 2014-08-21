@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140811033333) do
+ActiveRecord::Schema.define(:version => 20140821123423) do
 
   create_table "flag_comments", :force => true do |t|
     t.string   "username"
@@ -57,5 +57,6 @@ ActiveRecord::Schema.define(:version => 20140811033333) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end
