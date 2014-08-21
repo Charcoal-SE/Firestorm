@@ -65,5 +65,5 @@ Firestorm::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.app_root_domain = "firestorm.erwaysoftware.com"
+  config.app_root_domain = "http://firestorm.erwaysoftware.com"
 end
