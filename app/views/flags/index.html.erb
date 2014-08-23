@@ -1,7 +1,5 @@
-<h2>Flag list (<%= Flag.count %>)</h2>
-
 <table class="table">
-<% Flag.find(:all, :order=>"id desc", :limit => 50).each do |flag| %>
+<% Flag.where(:creator => current_user.id).find(:all, :order=>"id desc", :limit => 50).each do |flag| %>
 	<% user = User.find_by_id(flag.creator) %>
 	<tr>
 		<td class="col-md-12">

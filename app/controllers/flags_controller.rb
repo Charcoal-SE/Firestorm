@@ -5,6 +5,9 @@ class FlagsController < ApplicationController
 	end
 	def show
 		@flag = Flag.find_by_id(params[:id]) || not_found
+		if @flag.creator != current_user.id
+			not_found
+		end
 	end
 	def new
 		@flag = Flag.new
