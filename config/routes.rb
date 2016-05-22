@@ -8,7 +8,7 @@ Firestorm::Application.routes.draw do
 
   resources :flags
 
-  match "flags/view/:id/:presigned_string" => "flags#view"
+  get "flags/view/:id/:presigned_string" => "flags#view"
 
 #  devise_scope :user do
 #    get "/users/sign_up",  :to => "flags#index"
@@ -16,7 +16,7 @@ Firestorm::Application.routes.draw do
 
   devise_for :users
 
-  match "/", to: "flags#index"
+  get "/", to: "flags#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
