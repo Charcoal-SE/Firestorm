@@ -7,7 +7,7 @@ gem 'rails', '>= 4.2.6'
 
 gem 'sqlite3'
 
-gem 'devise'
+gem 'devise', '>= 4.1.1'
 
 gem 'awesome_print'
 
