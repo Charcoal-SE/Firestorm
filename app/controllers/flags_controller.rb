@@ -40,7 +40,7 @@ class FlagsController < ApplicationController
 
 	def view
 		link = PresignedLink.find_by_presigned_string(params[:presigned_string])
-		if !link or link.flag_id != params[:id]
+		if link.nil? || link.flag_id != params[:id].to_i
 			not_found
 			return
 		end
