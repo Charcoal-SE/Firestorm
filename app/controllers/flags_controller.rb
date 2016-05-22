@@ -24,7 +24,7 @@ class FlagsController < ApplicationController
 		link.flag_id = flag.id
 		link.presigned_string = SecureRandom.urlsafe_base64(5)
 		link.save!
-    
+
 		redirect_to flag_path(:id => flag.id)
 	end
 
@@ -37,15 +37,13 @@ class FlagsController < ApplicationController
 	end
 
 	def view
-		puts "logfind2: #{params}"
-
-		link=PresignedLinks.find_by_presigned_string(params["presigned_string"])
-		if !link or link.flag_id != params["id"].to_i
+		link = PresignedLinks.find_by_presigned_string(params[:presigned_string])
+		if !link or link.flag_id != params[:id]
 			not_found
 			return
 		end
 
-		@flag = Flag.find_by_id(params["id"])
+		@flag = Flag.find(params[:id])
 	end
 
 	def add_data
