@@ -1,6 +1,6 @@
-<h2><%= @flag.title %> <%= link_to "edit", "/flags/#{@flag.id}/edit", style: "font-size:12px"%>  <%= link_to "delete", @flag, :method=>:delete, :class=>:destroy, style: "font-size:12px"%></h2> 
-<% if PresignedLinks.find_by_flag_id(@flag.id) %>
-<p class="text-muted">Embed this link in flags: <code><%= ::Rails.application.config.app_root_domain+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %></code></p>
+<h2><%= @flag.title %> <%= link_to "edit", "/flags/#{@flag.id}/edit", style: "font-size:12px"%>  <%= link_to "delete", @flag, :method=>:delete, :class=>:destroy, style: "font-size:12px"%></h2>
+<% if @share_link %>
+  <p class="text-muted">Embed this link in flags: <code><%= ::Rails.application.config.app_root_domain + "/flags/view/" + @flag.id.to_s + "/" + @share_link.presigned_string %></code></p>
 <% end %>
 <p><%= @flag.summary %></p>
 

@@ -10,6 +10,7 @@ class FlagsController < ApplicationController
 		if @flag.user != current_user
 			not_found
 		end
+    @share_link = PresignedLink.find_by_flag_id(@flag.id)
 	end
 
 	def new
