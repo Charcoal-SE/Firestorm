@@ -8,7 +8,7 @@
 	<th class="col-md-2">Description</th>
 	<th class="col-md-10">Value</th>
 </tr>
-<% FlagData.find_all_by_flag_id(@flag.id).each do |data| %>
+<% @flag.flag_data.each do |data| %>
 	<tr>
 		<td class="col-md-1"><%= data.key %></td>
 		<td class="col-md-11"><%= data.object %></td>
