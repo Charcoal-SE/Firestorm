@@ -1,2 +1,2 @@
-class FlagComments < ActiveRecord::Base
+class FlagComment < ActiveRecord::Base
 end

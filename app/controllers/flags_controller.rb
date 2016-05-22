@@ -20,7 +20,7 @@ class FlagsController < ApplicationController
 		flag.creator = current_user
 		flag.save!
 
-		link = PresignedLinks.new
+		link = PresignedLink.new
 		link.flag_id = flag.id
 		link.presigned_string = SecureRandom.urlsafe_base64(5)
 		link.save!
@@ -37,7 +37,7 @@ class FlagsController < ApplicationController
 	end
 
 	def view
-		link = PresignedLinks.find_by_presigned_string(params[:presigned_string])
+		link = PresignedLink.find_by_presigned_string(params[:presigned_string])
 		if !link or link.flag_id != params[:id]
 			not_found
 			return

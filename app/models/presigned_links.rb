@@ -1,2 +1,2 @@
-class PresignedLinks < ActiveRecord::Base
+class PresignedLink < ActiveRecord::Base
 end
