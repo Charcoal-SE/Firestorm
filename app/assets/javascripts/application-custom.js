@@ -3,7 +3,7 @@ $(document).ready(function() {
 	{
 		var flag_id = $(this).attr("data-flag-id");
 		console.log(flag_id);
-		if ($("input#new-data-key-input").val().length > 0)
+		if ($("input#new-data-key-input").length > 0)
 		{
 			var newKey = $("input#new-data-key-input").val();
 			var newValue = $("input#new-data-value-input").val();
