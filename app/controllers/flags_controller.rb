@@ -16,15 +16,15 @@ class FlagsController < ApplicationController
 	end
 
 	def create
-		flag = Flag.new
-		flag.title = params[:flag]["title"]
-		flag.summary = params[:flag]["summary"]
+		flag = Flag.new(flag_params)
 		flag.creator = current_user
 		flag.save!
+
 		link = PresignedLinks.new
 		link.flag_id = flag.id
 		link.presigned_string = SecureRandom.urlsafe_base64(5)
 		link.save!
+    
 		redirect_to flag_path(:id => flag.id)
 	end
 
@@ -70,5 +70,9 @@ class FlagsController < ApplicationController
   private
     def set_flag
       @flag = Flag.find params[:flag_id]
+    end
+
+    def flag_params
+      params.require(:flag).permit(:title, :summary)
     end
 end
