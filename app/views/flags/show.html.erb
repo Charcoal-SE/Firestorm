@@ -24,6 +24,11 @@
 </tr>
 </table>
 
+<h4>Notes:</h4>
+<% @flag.flag_comments.each do |note| %>
+  <p><%= note.body %> &mdash; <span class="text-muted"><%= note.username %></span></p>
+<% end %>
+
 <h4>Leave a note</h4>
 <p class="text-muted">Anyone with this link can see notes</p>
 
