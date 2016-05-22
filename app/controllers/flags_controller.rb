@@ -67,7 +67,7 @@ class FlagsController < ApplicationController
 
   private
     def set_flag
-      @flag = Flag.find params[:flag_id]
+      @flag = Flag.find params[:id]
     end
 
     def flag_params
