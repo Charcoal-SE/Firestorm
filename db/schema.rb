@@ -29,9 +29,6 @@ ActiveRecord::Schema.define(:version => 20140821123423) do
     t.integer  "flag_id"
   end
 
-# Could not dump table "flags" because of following StandardError
-#   Unknown type 'User' for column 'creator'
-
   create_table "presigned_links", :force => true do |t|
     t.integer  "flag_id"
     t.string   "presigned_string"
