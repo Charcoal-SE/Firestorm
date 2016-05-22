@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821123423) do
+ActiveRecord::Schema.define(version: 20160522180012) do
 
   create_table "flag_comments", force: :cascade do |t|
     t.string   "username",   limit: 255
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20140821123423) do
     t.datetime "updated_at",             null: false
     t.integer  "flag_id"
   end
+
+  create_table "flags", force: :cascade do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "flags", ["user_id"], name: "index_flags_on_user_id"
 
   create_table "presigned_links", force: :cascade do |t|
     t.integer  "flag_id"
