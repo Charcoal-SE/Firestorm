@@ -27,7 +27,7 @@
 <h4>Leave a note</h4>
 <p class="text-muted">Anyone with this link can see notes</p>
 
-<%= form_for FlagComment.new, class: "add-comment-form", url: {action: "create"} do |f| %>
+<%= form_for FlagComment.new, class: "add-comment-form", url: {action: "add_note"} do |f| %>
 	<%= f.text_field :username, class: "form-control", placeholder: "Username"%>
 	<br />
 	<%= f.text_area :body, size:"60x3", class: "form-control", placeholder: "Text" %>

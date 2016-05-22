@@ -49,13 +49,18 @@ class FlagsController < ApplicationController
 	end
 
 	def add_data
-		data = FlagDatum.new
-		data.flag_id = @flag.id
-		data.key = params[:key]
-		data.object = params[:value]
+		data = FlagDatum.new(flag_datum_params)
+		data.flag = @flag
 		data.save!
 		render text: "success"
 	end
+
+  def add_note
+    note = FlagComment.new(flag_comment_params)
+    note.flag = @flag
+    note.save!
+    redirect_to flag_path(@flag.id)
+  end
 
 	def edit
 	end
@@ -73,5 +78,13 @@ class FlagsController < ApplicationController
 
     def flag_params
       params.require(:flag).permit(:title, :summary)
+    end
+
+    def flag_comment_params
+      params.require(:flag_comment).permit(:username, :body)
+    end
+
+    def flag_datum_params
+      params.require(:flag_datum).permit(:key, :value)
     end
 end
