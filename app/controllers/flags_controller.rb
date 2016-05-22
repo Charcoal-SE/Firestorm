@@ -59,8 +59,7 @@ class FlagsController < ApplicationController
 	end
 
 	def update
-		@flag.summary = params["flag"]["summary"]
-		@flag.title = params["flag"]["title"]
+		@flag.update(flag_params)
 		@flag.save!
 		redirect_to flag_path(@flag.id)
 	end
