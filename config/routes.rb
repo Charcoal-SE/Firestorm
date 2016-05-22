@@ -1,18 +1,8 @@
 Firestorm::Application.routes.draw do
-
-  get "sekrit/yay"
-
-  get "greetings/hello"
-
-  post "flags/add_data"
-
   resources :flags
-
-  get "flags/view/:id/:presigned_string" => "flags#view"
-
-#  devise_scope :user do
-#    get "/users/sign_up",  :to => "flags#index"
-#  end
+  post "flags/add_data"
+  get  "flags/view/:id/:presigned_string" => "flags#view"
+  post "flags/add_note"
 
   devise_for :users
 
