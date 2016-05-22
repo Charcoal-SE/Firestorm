@@ -6,7 +6,7 @@ class FlagsController < ApplicationController
 	end
 
 	def show
-		if @flag.creator != current_user.id
+		if @flag.user != current_user.id
 			not_found
 		end
 	end
@@ -17,7 +17,7 @@ class FlagsController < ApplicationController
 
 	def create
 		flag = Flag.new(flag_params)
-		flag.creator = current_user
+		flag.user = current_user
 		flag.save!
 
 		link = PresignedLink.new
@@ -29,7 +29,7 @@ class FlagsController < ApplicationController
 	end
 
 	def destroy
-		@flag.delete()
+		@flag.destroy
 		FlagData.find_all_by_flag_id(params[:id]).each do |d|
 			d.delete()
 		end
