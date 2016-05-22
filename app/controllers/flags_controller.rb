@@ -32,8 +32,8 @@ class FlagsController < ApplicationController
 
 	def destroy
 		@flag.destroy
-		FlagDatum.find_all_by_flag_id(params[:id]).each do |d|
-			d.delete()
+		FlagDatum.where(:flag_id => params[:id]).each do |d|
+			d.destroy
 		end
 		redirect_to "/flags"
 	end
