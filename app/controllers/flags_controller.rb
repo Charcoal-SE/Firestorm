@@ -1,8 +1,9 @@
 class FlagsController < ApplicationController
 	before_action :authenticate_user!, except: [:view, :add_data]
-  before_action :set_flag, :except => [:new, :create, :view]
+  before_action :set_flag, :except => [:index, :new, :create, :view]
 
 	def index
+    @flags = current_user.flags
 	end
 
 	def show
