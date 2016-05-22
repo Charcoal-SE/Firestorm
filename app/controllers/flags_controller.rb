@@ -1,5 +1,5 @@
 class FlagsController < ApplicationController
-	before_filter :authenticate_user!, except: [:view, :add_data]
+	before_action :authenticate_user!, except: [:view, :add_data]
   before_action :set_flag, :except => [:new, :create, :view]
 
 	def index
