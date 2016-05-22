@@ -32,7 +32,7 @@ class FlagsController < ApplicationController
 
 	def destroy
 		@flag.destroy
-		FlagData.find_all_by_flag_id(params[:id]).each do |d|
+		FlagDatum.find_all_by_flag_id(params[:id]).each do |d|
 			d.delete()
 		end
 		redirect_to "/flags"
@@ -49,7 +49,7 @@ class FlagsController < ApplicationController
 	end
 
 	def add_data
-		data = FlagData.new
+		data = FlagDatum.new
 		data.flag_id = @flag.id
 		data.key = params[:key]
 		data.object = params[:value]
