@@ -1,7 +1,5 @@
 class RenameTablesToSingularForm < ActiveRecord::Migration
-  def up
-  end
+  def change
 
-  def down
   end
 end
