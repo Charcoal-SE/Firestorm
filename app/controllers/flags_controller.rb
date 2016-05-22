@@ -7,7 +7,7 @@ class FlagsController < ApplicationController
 	end
 
 	def show
-		if @flag.user != current_user.id
+		if @flag.user != current_user
 			not_found
 		end
 	end
