@@ -26,7 +26,7 @@
 
 <h4>Notes:</h4>
 <% @flag.flag_comments.each do |note| %>
-  <p><%= note.body %> &mdash; <span class="text-muted"><%= note.username %></span></p>
+  <blockquote><p><%= note.body %> &mdash; <span class="text-muted"><%= note.username %></span></p></blockquote>
 <% end %>
 
 <h4>Leave a note</h4>
