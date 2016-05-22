@@ -1,7 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  summary: MyText
+  title: MyString
+  summary: MyString
+  user_id: 
 
 two:
-  summary: MyText
+  title: MyString
+  summary: MyString
+  user_id: 
