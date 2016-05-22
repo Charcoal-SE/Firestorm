@@ -1,8 +1,8 @@
 Firestorm::Application.routes.draw do
   resources :flags
-  post "flags/:id/add_data"
+  post "flags/:id/add_data", :to => 'flags#add_data'
   get  "flags/view/:id/:presigned_string" => "flags#view"
-  post "flags/:id/add_note"
+  post "flags/:id/add_note", :to => 'flags#add_note'
 
   devise_for :users
 
