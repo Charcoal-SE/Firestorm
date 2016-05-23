@@ -1,3 +1,5 @@
 class Flag < ActiveRecord::Base
-  attr_accessible :summary
+  belongs_to :user
+  has_many :flag_data
+  has_many :flag_comments
 end

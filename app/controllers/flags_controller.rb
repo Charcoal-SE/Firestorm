@@ -1,69 +1,90 @@
 class FlagsController < ApplicationController
-	before_filter :authenticate_user!, except: [:view, :add_data]
-	def index
+	before_action :authenticate_user!, except: [:view, :add_data]
+  before_action :set_flag, :except => [:index, :new, :create, :view]
 
+	def index
+    @flags = current_user.flags
 	end
+
 	def show
-		@flag = Flag.find_by_id(params[:id]) || not_found
-		if @flag.creator != current_user.id
+		if @flag.user != current_user
 			not_found
 		end
+    @share_link = PresignedLink.find_by_flag_id(@flag.id)
 	end
+
 	def new
 		@flag = Flag.new
 	end
+
 	def create
-		flag = Flag.new
-		flag.title = params[:flag]["title"]
-		flag.summary = params[:flag]["summary"]
-		flag.creator = current_user
+		flag = Flag.new(flag_params)
+		flag.user = current_user
 		flag.save!
-		link = PresignedLinks.new
+
+		link = PresignedLink.new
 		link.flag_id = flag.id
 		link.presigned_string = SecureRandom.urlsafe_base64(5)
 		link.save!
+
 		redirect_to flag_path(:id => flag.id)
 	end
+
 	def destroy
-		Flag.find_by_id(params["id"]).delete()
-		FlagData.find_all_by_flag_id(params["id"]).each do |d|
-			d.delete()
+		@flag.destroy
+		FlagDatum.where(:flag_id => params[:id]).each do |d|
+			d.destroy
 		end
 		redirect_to "/flags"
 	end
-	def view
-		puts "logfind2: #{params}"
 
-		link=PresignedLinks.find_by_presigned_string(params["presigned_string"])
-		if !link or link.flag_id != params["id"].to_i
+	def view
+		link = PresignedLink.find_by_presigned_string(params[:presigned_string])
+		if link.nil? || link.flag_id != params[:id].to_i
 			not_found
 			return
 		end
 
-		@flag = Flag.find_by_id(params["id"])
+		@flag = Flag.find(params[:id])
 	end
+
 	def add_data
-		flag = Flag.find_by_id(params["flag_id"])
-		if !flag
-			render text: "flag doesn't exist"
-			return
-		end
-		data = FlagData.new
-		data.flag_id = flag.id
-		data.key = params["key"]
-		data.object = params["value"]
+		data = FlagDatum.new(flag_datum_params)
+		data.flag = @flag
 		data.save!
 		render text: "success"
 	end
+
+  def add_note
+    note = FlagComment.new(flag_comment_params)
+    note.flag = @flag
+    note.save!
+    redirect_to flag_path(@flag.id)
+  end
+
 	def edit
-		puts "logfind3: #{params}"
-		@flag = Flag.find_by_id(params["id"].to_i)
 	end
+
 	def update
-		flag = Flag.find_by_id(params["id"])
-		flag.summary = params["flag"]["summary"]
-		flag.title = params["flag"]["title"]
-		flag.save!
-		redirect_to flag_path(params["id"])
+		@flag.update(flag_params)
+		@flag.save!
+		redirect_to flag_path(@flag.id)
 	end
-end	
+
+  private
+    def set_flag
+      @flag = Flag.find params[:id]
+    end
+
+    def flag_params
+      params.require(:flag).permit(:title, :summary)
+    end
+
+    def flag_comment_params
+      params.require(:flag_comment).permit(:username, :body)
+    end
+
+    def flag_datum_params
+      params.require(:flag_datum).permit(:key, :value)
+    end
+end

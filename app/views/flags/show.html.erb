@@ -1,6 +1,6 @@
-<h2><%= @flag.title %> <%= link_to "edit", "/flags/#{@flag.id}/edit", style: "font-size:12px"%>  <%= link_to "delete", @flag, :method=>:delete, :class=>:destroy, style: "font-size:12px"%></h2> 
-<% if PresignedLinks.find_by_flag_id(@flag.id) %>
-<p class="text-muted">Embed this link in flags: <code><%= ::Rails.application.config.app_root_domain+"/flags/view/"+@flag.id.to_s+"/"+PresignedLinks.find_by_flag_id(@flag.id).presigned_string %></code></p>
+<h2><%= @flag.title %> <%= link_to "edit", "/flags/#{@flag.id}/edit", style: "font-size:12px"%>  <%= link_to "delete", @flag, :method=>:delete, :class=>:destroy, style: "font-size:12px"%></h2>
+<% if @share_link %>
+  <p class="text-muted">Embed this link in flags: <code><%= ::Rails.application.config.app_root_domain + "/flags/view/" + @flag.id.to_s + "/" + @share_link.presigned_string %></code></p>
 <% end %>
 <p><%= @flag.summary %></p>
 
@@ -10,7 +10,7 @@
 	<th class="col-md-2">Description</th>
 	<th class="col-md-10">Value</th>
 </tr>
-<% FlagData.find_all_by_flag_id(@flag.id).each do |data| %>
+<% @flag.flag_data.each do |data| %>
 	<tr class="<%= "danger" if data.key.include? "foo" %>">
 		<td class="col-md-1"><%= data.key %></td>
 		<td class="col-md-11">
@@ -24,13 +24,18 @@
 </tr>
 </table>
 
-<!-- <h4>Leave a note</h4>
+<h4>Notes:</h4>
+<% @flag.flag_comments.each do |note| %>
+  <blockquote><p><%= note.body %> &mdash; <span class="text-muted"><%= note.username %></span></p></blockquote>
+<% end %>
+
+<h4>Leave a note</h4>
 <p class="text-muted">Anyone with this link can see notes</p>
 
-<%= form_for FlagComments.new, class: "add-comment-form", url: {action: "create"} do |f| %>
+<%= form_for FlagComment.new, class: "add-comment-form", url: {:controller => :flags, :action => :add_note, :id => @flag.id} do |f| %>
 	<%= f.text_field :username, class: "form-control", placeholder: "Username"%>
 	<br />
 	<%= f.text_area :body, size:"60x3", class: "form-control", placeholder: "Text" %>
 	<br />
 	<%= f.submit "Create", class: "btn btn-primary" %>
-<% end %> -->
+<% end %>

@@ -1,22 +1,12 @@
 Firestorm::Application.routes.draw do
-
-  get "sekrit/yay"
-
-  get "greetings/hello"
-
-  post "flags/add_data"
-
   resources :flags
-
-  match "flags/view/:id/:presigned_string" => "flags#view"
-
-  devise_scope :user do
-    get "/users/sign_up",  :to => "flags#index"
-  end
+  post "flags/:id/add_data", :to => 'flags#add_data'
+  get  "flags/view/:id/:presigned_string" => "flags#view"
+  post "flags/:id/add_note", :to => 'flags#add_note'
 
   devise_for :users
 
-  match "/", to: "flags#index"
+  get "/", to: "flags#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
